@@ -9,7 +9,8 @@ export const createPrediction = async (req, res) => {
     };
 //call the flowise endpoint
     const response = await fetch(
-     "http://localhost:3000/api/v1/prediction/51f97528-d8bd-4c40-8db1-e0568bbbcfa9",
+      `${process.env. FLOWISE_URL}/api/v1/prediction/${process.env.FLOW_ID}`,
+    //  "http://localhost:3000/api/v1/prediction/51f97528-d8bd-4c40-8db1-e0568bbbcfa9",
       {
         method: "POST",
         headers: {
