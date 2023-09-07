@@ -7,10 +7,25 @@ export const createPrediction = async (req, res) => {
     const flowiseData = {
       question: message,
     };
+//call the flowise endpoint
+    const response = await fetch(
+     "http://localhost:3000/api/v1/prediction/51f97528-d8bd-4c40-8db1-e0568bbbcfa9",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.FLOWISE_API_KEY}`      
+    },
+    body: JSON.stringify(flowiseData),
+  }
+  );
+  const data = await response.json();
+  console.log(data);
+    
 
-    res.status(200).json({ message: "Demo Response" });
+    res.status(200).json({ message: data });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
   }
-};
+}
